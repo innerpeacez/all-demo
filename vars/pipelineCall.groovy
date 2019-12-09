@@ -6,12 +6,17 @@ def call(body){
         stages{
 
             stage("git source") {
-                echo hello
+                steps {
+                    echo "git clone"
+                }
             }
 
             stage('docker deploy') {
-                echo "docker deploy"
-                mvn dockerfile:build
+//                echo "docker deploy"
+//                mvn dockerfile:build
+                steps {
+                    echo "docker deploy"
+                }
             }
         }
     }
