@@ -1,7 +1,7 @@
 def call(body){
 
     pipeline {
-        agent any
+        agent jenkins-slave
 
         stages{
 
