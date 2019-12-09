@@ -11,6 +11,7 @@ def call(body){
 
             stage('docker deploy') {
                 echo "docker deploy"
+                mvn dockerfile:build
             }
         }
     }
