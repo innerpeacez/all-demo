@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -44,43 +45,23 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>com.spotify</groupId>-->
-<!--                <artifactId>docker-maven-plugin</artifactId>-->
-<!--                <version>1.2.1</version>-->
-<!--                <configuration>-->
-<!--                    <imageName>${project.build.finalName}</imageName>-->
-<!--                    <baseImage>java</baseImage>-->
-<!--                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>-->
-<!--                    &lt;!&ndash; copy the service's jar file from target into the root directory of the image &ndash;&gt;-->
-<!--                    <resources>-->
-<!--                        <resource>-->
-<!--                            <targetPath>/</targetPath>-->
-<!--                            <directory>${project.build.directory}</directory>-->
-<!--                            <include>${project.build.finalName}.jar</include>-->
-<!--                        </resource>-->
-<!--                    </resources>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>1.8.0</version>
                 <configuration>
-                    <repository>spotify/foobar</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
+                    <from>
+                        <image>registry-hz.rubikstack.com/library/java:8</image>
+                    </from>
+                    <to>
+                        <image>registry-hz.rubikstack.com/lichen/${project.build.finalName}</image>
+                        <tags>${maven.build.timestamp}</tags>
+                    </to>
+                    <container>
+                        <appRoot>/app</appRoot>
+                        <useCurrentTimestamp>true</useCurrentTimestamp>
+                        <workingDirectory>/app</workingDirectory>
+                    </container>
                 </configuration>
             </plugin>
         </plugins>
