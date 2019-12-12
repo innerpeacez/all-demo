@@ -9,7 +9,7 @@ def call(body){
                 steps {
                     sh pwd
                     sh ls -a
-                    sh echo "git clone"
+                    echo "git clone"
                 }
             }
 
