@@ -7,7 +7,7 @@ def call(body){
 
             stage('jib build') {
                 steps {
-                    mvn compile jib:build
+                    sh mvn compile jib:build
                 }
             }
         }
