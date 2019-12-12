@@ -8,7 +8,7 @@ def call(body){
             stage("git source") {
                 steps {
                     sh pwd
-                    sudo -i sh ls -a
+                    sudo -i ls -a
                     echo "git clone"
                 }
             }
