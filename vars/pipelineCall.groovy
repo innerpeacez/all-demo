@@ -5,19 +5,9 @@ def call(body){
 
         stages{
 
-            stage("git source") {
+            stage('jib build') {
                 steps {
-                    sleep 1000
-                    sh pwd
-                    echo "git clone"
-                }
-            }
-
-            stage('docker deploy') {
-//                echo "docker deploy"
-//                mvn dockerfile:build
-                steps {
-                    echo "docker deploy"
+                    mvn compile jib:build
                 }
             }
         }
