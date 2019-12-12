@@ -7,7 +7,7 @@ def call(body){
 
             stage('jib build') {
                 steps {
-                    cd ./workspace/java-test
+                    sh cd ./workspace/java-test
                     sh mvn compile jib:build
                 }
             }
