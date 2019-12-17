@@ -1,4 +1,46 @@
 def call(body){
+    pipeline {
+        agent {
+            kubernetes {
+                label 'jenkins-slave'
+                yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: maven
+    image: maven:3.6.3-jdk8
+    command:
+    - cat
+    tty: true
+  - name: busybox
+    image: busybox
+    command:
+    - cat
+    tty: true
+"""
+            }
+        }
+        stages {
+            stage('Run maven') {
+                steps {
+                    container('maven') {
+                        sh 'mvn -version'
+                    }
+                    container('busybox') {
+                        sh '/bin/busybox'
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
 //    pipeline {
 //        agent {label 'jenkins-slave'}
 //
@@ -27,25 +69,25 @@ def call(body){
 //    workingDir: /home/jenkins/agent
 //    image: registry.cn-shanghai.aliyuncs.com/mydlq/jnlp-slave:3.35-5-alpine
 
-    pipeline {
-//        environment {
-//            IMAGE_TAG = sh (returnStdout: true, script: 'echo "build-${BRANCH_NAME//\\//_}-$BUILD_NUMBER"').trim()
+//    pipeline {
+////        environment {
+////            IMAGE_TAG = sh (returnStdout: true, script: 'echo "build-${BRANCH_NAME//\\//_}-$BUILD_NUMBER"').trim()
+////        }
+//        agent {
+//            kubernetes {
+//                defaultContainer 'jnlp'
+//                yamlFile 'KubernetesPod.yaml'
+//            }
 //        }
-        agent {
-            kubernetes {
-                defaultContainer 'jnlp'
-                yamlFile 'KubernetesPod.yaml'
-            }
-        }
-        stages {
-            stage('Run maven') {
-                steps {
-                    container('maven') {
-                        echo "代码编译打包"
-//                        sh 'mvn clean install'
-                    }
-                }
-            }
+//        stages {
+//            stage('Run maven') {
+//                steps {
+//                    container('maven') {
+//                        echo "代码编译打包"
+////                        sh 'mvn clean install'
+//                    }
+//                }
+//            }
 //            stage('Build image') {
 //                steps {
 //                    container('docker') {
@@ -72,8 +114,8 @@ def call(body){
 //                    }
 //                }
 //            }
-
-        }
-    }
+//
+//        }
+//    }
 }
 
