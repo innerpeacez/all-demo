@@ -42,7 +42,7 @@ def call(body){
                 steps {
                     container('maven') {
                         echo "代码编译打包"
-                        sh 'mvn clean install'
+//                        sh 'mvn clean install'
                     }
                 }
             }
