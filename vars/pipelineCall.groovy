@@ -20,7 +20,7 @@ spec:
         cpu: 1
         memory: 1Gi
   - name: maven
-    image: registry-hz.rubikstack.com/library/maven:3.6.3-jdk8
+    image: registry-hz.rubikstack.com/library/maven:3.6.3-jdk8-aliyun
     command:
     - cat
     tty: true
