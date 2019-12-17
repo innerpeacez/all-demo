@@ -1,6 +1,6 @@
 metadata:
   labels:
-    jenkins-slave: jenkins-slave
+    jenkins-slave: jenkins-slave2
 spec:
   containers:
     - name: jnlp
