@@ -33,7 +33,7 @@ def call(body){
 //        }
         agent {
             kubernetes {
-                defaultContainer 'maven'
+                defaultContainer 'jnlp'
                 yamlFile 'KubernetesPod.yaml'
             }
         }

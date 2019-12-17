@@ -14,26 +14,26 @@ spec:
         requests:
           cpu: 1
           memory: 1Gi
-    - name: maven
-      image: maven:3.6.3-jdk8
-      command:
-        - cat
-      tty: true
-      env:
-        - name: CONTAINER_ENV_VAR
-          value: maven
-      volumeMounts:
-        - name: repo-maven-cache
-          mountPath: /root/.m2
-    - name: kubectl
-      image: cnych/kubectl
-      command:
-        - cat
-      tty: true
-      env:
-        - name: CONTAINER_ENV_VAR
-          value: kubectl
-  volumes:
-    - name: repo-maven-cache
-      persistentVolumeClaim:
-        claimName: pvc-jenkins-maven-cache
+#    - name: maven
+#      image: maven:3.6.3-jdk8
+#      command:
+#        - cat
+#      tty: true
+#      env:
+#        - name: CONTAINER_ENV_VAR
+#          value: maven
+#      volumeMounts:
+#        - name: repo-maven-cache
+#          mountPath: /root/.m2
+#    - name: kubectl
+#      image: cnych/kubectl
+#      command:
+#        - cat
+#      tty: true
+#      env:
+#        - name: CONTAINER_ENV_VAR
+#          value: kubectl
+#  volumes:
+#    - name: repo-maven-cache
+#      persistentVolumeClaim:
+#        claimName: pvc-jenkins-maven-cache
