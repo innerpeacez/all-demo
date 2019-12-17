@@ -4,16 +4,10 @@ metadata:
 spec:
   containers:
     - name: jnlp
+      image: registry.cn-shanghai.aliyuncs.com/mydlq/docker:18.06.3-dind
       env:
         - name: CONTAINER_ENV_VAR
           value: jnlp
-      resources:
-        limits:
-          cpu: 1
-          memory: 1Gi
-        requests:
-          cpu: 1
-          memory: 1Gi
 #    - name: maven
 #      image: maven:3.6.3-jdk8
 #      command:
