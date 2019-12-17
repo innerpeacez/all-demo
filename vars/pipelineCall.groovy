@@ -2,25 +2,46 @@ def call(body){
     pipeline {
         agent {
             kubernetes {
-                label 'jenkins-slave'
                 yaml """
-apiVersion: v1
-kind: Pod
 metadata:
   labels:
-    some-label: some-label-value
+    jekins-slave: jenkins-slave
 spec:
   containers:
+  - name: jnlp
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: jnlp
+    resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
+      requests:
+        cpu: 1
+        memory: 1Gi
   - name: maven
     image: maven:3.6.3-jdk8
     command:
     - cat
     tty: true
-  - name: busybox
-    image: busybox
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: maven
+    volumeMounts:
+    - name: repo-maven-cache
+      mountPath: /root/.m2
+  - name: kubectl
+    image: cnych/kubectl
     command:
     - cat
     tty: true
+    env:
+    - name: CONTAINER_ENV_VAR
+      value: kubectl
+  volumes:
+  - name: repo-maven-cache
+    persistentVolumeClaim:
+      claimName: pvc-jenkins-maven-cache
 """
             }
         }
