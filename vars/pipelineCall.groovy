@@ -28,9 +28,9 @@ def call(body){
 //    image: registry.cn-shanghai.aliyuncs.com/mydlq/jnlp-slave:3.35-5-alpine
 
     pipeline {
-        environment {
-            IMAGE_TAG = sh (returnStdout: true, script: 'echo "build-${BRANCH_NAME//\\//_}-$BUILD_NUMBER"').trim()
-        }
+//        environment {
+//            IMAGE_TAG = sh (returnStdout: true, script: 'echo "build-${BRANCH_NAME//\\//_}-$BUILD_NUMBER"').trim()
+//        }
         agent {
             kubernetes {
                 defaultContainer 'maven'
